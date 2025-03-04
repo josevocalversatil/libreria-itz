@@ -1,0 +1,57 @@
+# registramos en AWS
+# creamos una instancia de CS2
+
+# descargamos gitbach
+
+# PASO 1 nos cocnectamos a la instancia con git bash 
+ssh -i libreria-itz-app.pem ubuntu@18.218.131.64
+# le damos yes y entramos al sistema operativo de ubuntu 
+# PASO 2 actualizamos el sistema operativo
+sudo apt-get update && sudo apt-get upgrade -y
+# PASO 3 instalamos los packetes necesarios para instalar docker
+sudo apt install -y ca-certificates curl gnupg 
+#PASO 4 agregamos la llave de docker GPG de docker 
+# añade la clave GPG oficial de Docker para verificar la autenticidad del paquete 
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo tee /etc/apt/keyrings/docker.asc > /dev/null
+# instalamos docker
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# PASO 5 agregamos el repositorio de docker a nuestro sistema operativo
+echo \
+  "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# paso 6 instalamos docker
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# paso 7 verificamos que docker este instalado 
+sudo systemctl status docker
+
+# paso 8 si el servicio esta detenido lo iniciamos con el siguiente comando
+sudo systemctl start docker
+
+# paso 9 habilitamos el servicio para que inicie con el sistema operativo
+sudo systemctl enable docker
+
+# paso 10 agregamos a nuestro usuario al grupo de docker 
+sudo usermod -aG docker $USER
+
+newgrp docker
+# verificamos 
+docker ps
+
+# paso 11 construimos la imagen de docker
+docker build -t zawervv/libreria-itz-image:latest .
+
+# paso 12 verificamos que se creo la imagen 
+docker images
+
+#paso 13 hacemos un login 
+docker login
+
+#paso 14  PUBLICAMOS NUESTRA IMAGEN EN DOCKER HUB
+docker push zawervv/libreria-itz-image:latest
+
+# 1:45 aquii me quede 

