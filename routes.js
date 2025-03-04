@@ -225,4 +225,6 @@ router.delete('/libros/:id', async (req, res) => {
     librosController.remove(req, res);
 });
 
+app.use('/documentacion', swaggerUi.serve, swaggerUi.setup(swaggerSpec, optionsV1));
+
 module.exports = router; 

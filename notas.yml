@@ -55,3 +55,22 @@ docker login
 docker push zawervv/libreria-itz-image:latest
 
 # 1:45 aquii me quede 
+
+## clonamos nuestro repositorio 
+git init 
+# creamos un .gitignore y agregamos node_modules
+git add .
+git commit -m "first commit"
+
+# CREAMOS UN REPOSITORIO EN GIThUB
+git remote add origin https://github.com/josevocalversatil/libreria-itz.git
+git branch -M main
+git push -u origin main
+
+# clonamos el repositorio en AWS
+git clone https://github.com/josevocalversatil/libreria-itz.git
+
+# publicamos nuestra imagen BASH
+docker build -t zawervv/libreria-itz-image:latest . 
+# verificamos que se creo la imagen
+docker compose up -d
